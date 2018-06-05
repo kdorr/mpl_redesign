@@ -1,17 +1,53 @@
 import matplotlib.pyplot as plt
 import pandas
 
+
+# ----
+# Data
+# ----
+
+
 df = pandas.read_csv("data.csv")
+
+# Raw Plot
 raw = df
 raw = raw.sort_values('dollars', ascending=False)
-y_range = [row[0] for row in raw.values]
-print(y_range)
-width = [row[1] for row in raw.values]
+raw_y = [row[0] for row in raw.values]
+raw_width = [row[1] for row in raw.values]
+
+# Percentage Plot
+perc = df
+perc = perc.sort_values('dollars', ascending=False)
+perc['dollars'] = perc['dollars']/perc['dollars'].sum()
+perc['remainder'] = 1 - perc['dollars']
+perc_y = [row[0] for row in perc.values]
+perc_width = [row[1] for row in perc.values]
+perc_remainder = [row[2] for row in perc.values]
+
+
+# --------
+# Plotting
+# --------
+
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6), tight_layout=True)
-rect1 = ax1.barh(y_range, width)
+
+# Plot raw numbers
+rect1 = ax1.barh(raw_y, raw_width)
 ax1.set_xlim(0, 165000)
 ax1.set_ylim(-0.6, 19.6)
+# TODO axis labels
+
+#Plot percentages
+rect2 = ax2.barh(perc_y, perc_width)
+ax2.barh(perc_y, perc_remainder, left=perc_width)
+ax2.set_xlim(0, 1)
+ax2.set_ylim(-0.6, 19.6)
+# TODO axis labels
+
+# -----------
+# Data Labels
+# -----------
 
 
 def autolabel(rects, ax):
@@ -26,7 +62,8 @@ def autolabel(rects, ax):
 
         if p_width > 0.95:
             print("greater")
-            label_position = width - (x_height * 0.15)
+            label_position = width - (x_height * 0.17)
+            # TODO change color to white
         else:
             label_position = width + (x_height * 0.01)
 
@@ -36,9 +73,6 @@ def autolabel(rects, ax):
 
 
 autolabel(rect1, ax1)
-
-ax2.barh(y_range, width)
-ax2.set_xlim(0, 100)
-ax2.set_ylim(-0.6, 19.6)
+autolabel(rect2, ax2)  # TODO make it plot percentage instead of $
 
 plt.show()
