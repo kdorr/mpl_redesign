@@ -38,15 +38,16 @@ rect1 = ax1.barh(raw_y, raw_width)
 ax1.set_title("Raw Numbers")
 ax1.set_xlim(0, 165000)
 ax1.set_ylim(-0.6, 19.6)
-# TODO axis labels
+ax1.set_xlabel("Funding (in dollars)")
+ax1.set_ylabel("Organization")
 
 #Plot percentages
 rect2 = ax2.barh(perc_y, perc_width)
-ax2.set_title("% of Whole Budget")
+ax2.set_title("Percent of Whole Budget")
 ax2.barh(perc_y, perc_remainder, left=perc_width)
 ax2.set_xlim(0, 1)
 ax2.set_ylim(-0.6, 19.6)
-# TODO axis labels
+ax2.set_xlabel("Percentage of Whole Tier One Budget")
 
 # -----------
 # Data Labels
