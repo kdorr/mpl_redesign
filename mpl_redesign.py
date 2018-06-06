@@ -34,17 +34,17 @@ fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
 fig.suptitle("Tier One Organization Budget Breakdown", size=16)
 
 # Plot raw numbers
-rect1 = ax1.barh(raw_y, raw_width)
+rect1 = ax1.barh(raw_y, raw_width, color="#2b8cbe")
 ax1.set_title("Raw Numbers")
 ax1.set_xlim(0, 165000)
 ax1.set_ylim(-0.6, 19.6)
 ax1.set_xlabel("Funding (in dollars)")
 ax1.set_ylabel("Organization")
 
-#Plot percentages
-rect2 = ax2.barh(perc_y, perc_width)
+# Plot percentages
+rect2 = ax2.barh(perc_y, perc_width, color="#7ecd92")
 ax2.set_title("Percent of Whole Budget")
-ax2.barh(perc_y, perc_remainder, left=perc_width)
+ax2.barh(perc_y, perc_remainder, left=perc_width, color="#bae4bc")
 ax2.set_xlim(0, 100)
 ax2.set_ylim(-0.6, 19.6)
 ax2.set_xlabel("Percentage of Whole Tier One Budget")
