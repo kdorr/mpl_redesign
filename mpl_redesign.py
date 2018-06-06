@@ -30,16 +30,19 @@ perc_remainder = [row[2] for row in perc.values]
 # --------
 
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6), tight_layout=True)
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
+fig.suptitle("Tier One Organization Budget Breakdown", size=16)
 
 # Plot raw numbers
 rect1 = ax1.barh(raw_y, raw_width)
+ax1.set_title("Raw Numbers")
 ax1.set_xlim(0, 165000)
 ax1.set_ylim(-0.6, 19.6)
 # TODO axis labels
 
 #Plot percentages
 rect2 = ax2.barh(perc_y, perc_width)
+ax2.set_title("% of Whole Budget")
 ax2.barh(perc_y, perc_remainder, left=perc_width)
 ax2.set_xlim(0, 1)
 ax2.set_ylim(-0.6, 19.6)
@@ -75,4 +78,6 @@ def autolabel(rects, ax):
 autolabel(rect1, ax1)
 autolabel(rect2, ax2)  # TODO make it plot percentage instead of $
 
+fig.tight_layout()
+fig.subplots_adjust(top=0.88)
 plt.show()
