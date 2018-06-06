@@ -18,8 +18,8 @@ raw_width = [row[1] for row in raw.values]
 # Percentage Plot
 perc = df
 perc = perc.sort_values('dollars', ascending=False)
-perc['dollars'] = perc['dollars']/perc['dollars'].sum()
-perc['remainder'] = 1 - perc['dollars']
+perc['dollars'] = (perc['dollars']/perc['dollars'].sum())*100
+perc['remainder'] = 100 - perc['dollars']
 perc_y = [row[0] for row in perc.values]
 perc_width = [row[1] for row in perc.values]
 perc_remainder = [row[2] for row in perc.values]
@@ -45,7 +45,7 @@ ax1.set_ylabel("Organization")
 rect2 = ax2.barh(perc_y, perc_width)
 ax2.set_title("Percent of Whole Budget")
 ax2.barh(perc_y, perc_remainder, left=perc_width)
-ax2.set_xlim(0, 1)
+ax2.set_xlim(0, 100)
 ax2.set_ylim(-0.6, 19.6)
 ax2.set_xlabel("Percentage of Whole Tier One Budget")
 
@@ -54,30 +54,27 @@ ax2.set_xlabel("Percentage of Whole Tier One Budget")
 # -----------
 
 
-def autolabel(rects, ax):
+def autolabel(rects, ax, str_format):
     (x_bottom, x_top) = ax.get_xlim()
     x_height = x_top - x_bottom
 
     for rect in rects:
-        print(rect.get_width())
         width = rect.get_width()
 
         p_width = (width / x_height)
 
         if p_width > 0.95:
-            print("greater")
-            label_position = width - (x_height * 0.17)
-            # TODO change color to white
+            label_position = width - (x_height * 0.19)
         else:
             label_position = width + (x_height * 0.01)
 
         ax.text(label_position, rect.get_y() + rect.get_height()/2.,
-                '$%.f' % width,
+                str_format.format(width),
                 ha='left', va='center')
 
 
-autolabel(rect1, ax1)
-autolabel(rect2, ax2)  # TODO make it plot percentage instead of $
+autolabel(rect1, ax1, '${:,.0f}')
+autolabel(rect2, ax2, '{:.1f}%')
 
 fig.tight_layout()
 fig.subplots_adjust(top=0.88)
