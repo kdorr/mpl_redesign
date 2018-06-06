@@ -1,5 +1,5 @@
 # mpl_redesign
-The matplotlib version of a graphic redesign orignally done for my 2018 statistics colloquium class. For the original assignment, I implemented my team's design ideas using the Bokeh plotting library. For a small summer project, I decided to remake our new graphic using Matplotlib.
+The Matplotlib version of a graphic redesign orignally done for my 2018 statistics colloquium class. For the original assignment, I implemented my team's design ideas using the Bokeh plotting library. For a small summer project, I decided to remake our new graphic using Matplotlib.
 
 This is the redesigned graphic:
 ![alt text](final.png "The redesigned graphic")
