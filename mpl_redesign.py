@@ -45,7 +45,7 @@ ax1.xaxis.set_major_locator(ticker.MultipleLocator(50000))
 ax1.xaxis.set_major_formatter(ticker.StrMethodFormatter('${x:,g}'))
 ax1.tick_params(axis='both', labelsize=8)
 ax1.set_xlabel("Funding (in dollars)", size=10)
-ax1.set_ylabel("Organization")
+ax1.set_ylabel("Organization", size=10)
 
 # Plot percentages
 rect2 = ax2.barh(perc_y, perc_width, color="#7ecd92")
@@ -57,7 +57,7 @@ ax2.set_ylim(-0.6, 19.6)
 ax2.xaxis.set_minor_locator(ticker.AutoMinorLocator())
 ax2.xaxis.set_major_formatter(ticker.PercentFormatter())
 ax2.tick_params(axis='both', labelsize=8)
-ax2.set_xlabel("Percentage of Whole Tier One Budget")
+ax2.set_xlabel("Percentage of Whole Tier One Budget", size=10)
 
 
 # -----------
@@ -73,12 +73,12 @@ def autolabel(rects, ax, str_format):
         rect_width = rect.get_width()
 
         if (rect_width / x_lim) > 0.95:
-            label_position = rect_width - (x_lim * 0.19)
+            label_position = rect_width - (x_lim * 0.14)
         else:
             label_position = rect_width + (x_lim * 0.01)
 
         ax.text(label_position, rect.get_y() + rect.get_height()/2.,
-                str_format.format(rect_width), ha='left', va='center')
+                str_format.format(rect_width), ha='left', va='center', fontsize=8)
 
 
 autolabel(rect1, ax1, '${:,.0f}')
