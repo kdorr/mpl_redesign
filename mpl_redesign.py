@@ -55,21 +55,21 @@ ax2.set_xlabel("Percentage of Whole Tier One Budget")
 
 
 def autolabel(rects, ax, str_format):
-    (x_bottom, x_top) = ax.get_xlim()
-    x_height = x_top - x_bottom
+    (x_left, x_right) = ax.get_xlim()
+    x_lim = x_right - x_left
 
     for rect in rects:
-        width = rect.get_width()
+        rect_width = rect.get_width()
 
-        p_width = (width / x_height)
+        width_proportion = (rect_width / x_lim)
 
-        if p_width > 0.95:
-            label_position = width - (x_height * 0.19)
+        if width_proportion > 0.95:
+            label_position = rect_width - (x_lim * 0.19)
         else:
-            label_position = width + (x_height * 0.01)
+            label_position = rect_width + (x_lim * 0.01)
 
         ax.text(label_position, rect.get_y() + rect.get_height()/2.,
-                str_format.format(width),
+                str_format.format(rect_width),
                 ha='left', va='center')
 
 
